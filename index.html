@@ -475,8 +475,9 @@
       <p style="color:var(--text-light);font-size:15px;margin-top:8px">أماكن محدودة — سارع بالتسجيل وهنتواصل معاك خلال 24 ساعة</p>
     </div>
 
-    <form id="bookingForm" novalidate>
-      <input type="hidden" name="to_email" value="kareemswilm9@gmail.com">
+    <form id="bookingForm" action="https://formsubmit.co/ajax/kareemswilm9@gmail.com" method="POST" novalidate>
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_subject" value="طلب تسجيل جديد من Kids Academy" />
       <div class="form-grid">
 
         <!-- الاسم -->
@@ -670,18 +671,19 @@ document.getElementById('bookingForm').addEventListener('submit', async function
   const fd = new FormData(this);
   const body = buildBody(fd);
 
-  // إضافة حقول إضافية
   fd.append('message', body);
-  fd.append('access_key', '1e43b2e5-acb6-42fe-9aec-b59d7a8db4cb');
-  
+
   try {
-    const response = await fetch('https://api.web3forms.com/submit', {
+    const response = await fetch(this.action, {
       method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+      },
       body: fd,
     });
-    
+
     const data = await response.json();
-    
+
     if (data.success) {
       showToast('✅ تم إرسال طلبك بنجاح! هنتواصل معاك قريباً 🎉');
       this.reset();
@@ -706,7 +708,5 @@ document.querySelectorAll('.feat-card, .spec-card, .stat-card').forEach(el => {
   observer.observe(el);
 });
 </script>
-
-<!-- Web3Forms - خدمة إرسال البريد المجانية والموثوقة -->
 </body>
 </html>

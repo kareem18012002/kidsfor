@@ -1,0 +1,9 @@
+# Ignore macOS and Windows system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node modules if any
+node_modules/
